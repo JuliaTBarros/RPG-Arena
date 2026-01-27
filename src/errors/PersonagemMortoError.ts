@@ -1,6 +1,8 @@
 export class PersonagemMortoError extends Error {
 	constructor(nome: string) {
-		super(`O personagem ${nome} está morto e não pode realizar esta ação.`);
+		super(
+			`🕯️ A alma de ${nome} já partiu para o plano espiritual. Os mortos não podem empunhar armas ou sofrer mais dor.`,
+		);
 		this.name = 'PersonagemMortoError';
 	}
 }

@@ -1,6 +1,8 @@
 export class InventarioCheioError extends Error {
 	constructor() {
-		super('O inventário está cheio! Limite máximo de 5 itens atingido.');
+		super(
+			'🎒 Suas bolsas estão pesadas e as fivelas prestes a romper! Não há espaço para mais nem mesmo uma folha de erva medicinal.',
+		);
 		this.name = 'InventarioCheioError';
 	}
 }
