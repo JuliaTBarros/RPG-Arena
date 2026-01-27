@@ -1,6 +1,6 @@
 export enum ClassePersonagem {
-	Guerreiro = 'GUERREIRO',
-	Mago = 'MAGO',
-	Arqueiro = 'ARQUEIRO',
-	Ladino = 'LADINO',
+	Guerreiro = 'Guerreiro',
+	Mago = 'Mago',
+	Arqueiro = 'Arqueiro',
+	Ladino = 'Ladino',
 }

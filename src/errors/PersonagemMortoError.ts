@@ -1,6 +1,6 @@
 export class PersonagemMortoError extends Error {
-	constructor(nomePersonagem: string) {
-		super(`O personagem ${nomePersonagem} está morto.`);
+	constructor(nome: string) {
+		super(`O personagem ${nome} está morto e não pode realizar esta ação.`);
 		this.name = 'PersonagemMortoError';
 	}
 }

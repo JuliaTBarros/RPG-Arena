@@ -1,7 +1,8 @@
 import { Raridade } from '../enums/Raridade';
-export interface IItens {
+
+export interface IItem {
 	nome: string;
-	descição: string;
-    raridade: Raridade;
-    usar(): void;
+	descricao: string;
+	raridade: Raridade;
+	usar(): void;
 }

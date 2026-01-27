@@ -1,8 +1,6 @@
 export class ManaInsuficienteError extends Error {
-	constructor(ManaAtual: number, ManaNecessaria: number) {
-		super(
-			`Mana insuficiente. \nMana Atual: ${ManaAtual} \nMana Necessária: ${ManaNecessaria}`,
-		);
+	constructor(nome: string) {
+		super(`O personagem ${nome} não possui mana suficiente.`);
 		this.name = 'ManaInsuficienteError';
 	}
 }

@@ -1,7 +1,7 @@
 export enum Raridade {
-    Comum = 'COMUM',
-    Incomum = 'INCOMUM',
-    Raro = 'RARO',
-    Épico = 'ÉPICO',
-    Lendário = 'LENDÁRIO',
+	Comum = 'Comum',
+	Incomum = 'Incomum',
+	Raro = 'Raro',
+	Epico = 'Epico',
+	Lendario = 'Lendario',
 }
