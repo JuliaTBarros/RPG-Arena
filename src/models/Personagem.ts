@@ -23,7 +23,7 @@ export abstract class Personagem {
 		this.nome = nome;
 		this.classe = classe;
 		this._vidaMaxima = vida;
-		this._vida = this._vidaMaxima;
+		this._vida = vida;
 		this.ataque = ataque;
 		this.defesa = defesa;
 	}
