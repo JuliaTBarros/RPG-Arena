@@ -6,7 +6,7 @@ import { InventarioCheioError } from '../errors/InventarioCheioError';
 export abstract class Personagem {
 	private _vida: number;
 	private _vidaMaxima: number;
-	private _inventario: IItem[] = []; // Maximo 5 itens
+	private _inventario: IItem[] = [];
 
 	public readonly nome: string;
 	public classe: ClassePersonagem;
