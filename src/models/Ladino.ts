@@ -27,6 +27,10 @@ export class Ladino extends Personagem {
 		}
 	}
 
+	public override getNomeRecurso(): string {
+		return 'Energia';
+	}
+
 	/**
 	 * Ataque Furtivo: O Ladino desaparece nas sombras e atinge um ponto vital.
 	 * Custo: 20 de mana. Dano: 2.5x o ataque (ignora parte da defesa).
@@ -37,7 +41,7 @@ export class Ladino extends Personagem {
 
 		const custo = 20;
 		if (this._mana < custo) {
-			throw new ManaInsuficienteError(this.nome);
+			throw new ManaInsuficienteError(this);
 		}
 
 		this.mana -= custo;

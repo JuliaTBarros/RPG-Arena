@@ -23,6 +23,17 @@ export class Arena {
 		return encontrado;
 	}
 
+	public listarLutadores(): void {
+		console.log('\n--- 📜 LISTA DE LUTADORES NA ARENA ---');
+		if (this._lutadores.length === 0) {
+			console.log('A arena está vazia.');
+			return;
+		}
+		this._lutadores.forEach((l, index) => {
+			console.log(`${index + 1}. [${l.classe}] ${l.nome} - ❤️ Vida: ${l.vida}`);
+		});
+	}
+
 	public batalhar(nome1: string, nome2: string): void {
 		const p1 = this.buscarLutador(nome1);
 		const p2 = this.buscarLutador(nome2);
@@ -42,10 +53,15 @@ export class Arena {
 				'Usar Item',
 				'Passar Vez',
 			];
-			const escolha = readline.keyInSelect(acoes, 'Escolha sua acao:');
+			const escolha = readline.keyInSelect(
+				acoes,
+				'O que farás neste turno, bravo combatente?',
+			);
 
 			if (escolha === -1) {
-				console.log('🏳️ O lutador fugiu da arena! Duelo cancelado.');
+				console.log(
+					'🏳️ O lutador fugiu da arena! O destino interveio e o combate foi interrompido.',
+				);
 				return;
 			}
 

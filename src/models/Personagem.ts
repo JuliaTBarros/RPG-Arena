@@ -46,6 +46,10 @@ export abstract class Personagem {
 		}
 	}
 
+	public getNomeRecurso(): string {
+		return 'Recurso';
+	}
+
 	estaVivo(): boolean {
 		return this._vida > 0;
 	}
@@ -111,9 +115,9 @@ export abstract class Personagem {
 			this._inventario.splice(indice, 1);
 		} else {
 			console.log(
-				`❌ ${this.nome} tateia seu inventário, mas não encontra nada naquela posição.`,
+				`❌ ${this.nome}, suas mãos tateiam o fundo da bolsa, mas encontram apenas o vazio.`,
 			);
-			throw new Error('Espaço de inventário vazio.');
+			throw new Error('Este compartimento da sua algibeira está desocupado.');
 		}
 	}
 }

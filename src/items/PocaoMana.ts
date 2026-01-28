@@ -11,21 +11,21 @@ export class PocaoMana implements IItem {
 
 	usar(personagem: Personagem): void {
 		if ('mana' in personagem) {
-			(personagem as any).mana += 30;
+			const pComMana = personagem as Personagem & { mana: number };
+			pComMana.mana += 30;
 
-			const recurso =
-				personagem.classe === ClassePersonagem.Ladino ? 'Energia' : 'Mana';
+			const recurso = personagem.getNomeRecurso();
 
 			console.log(
 				`🌀 Uma essência azulada envolve ${personagem.nome}, restaurando seu fluxo de ${recurso}!`,
 			);
-			console.log(`🧪 ${recurso} atual: ${(personagem as any).mana}`);
+			console.log(`🧪 ${recurso} atual: ${pComMana.mana}`);
 		} else {
 			console.log(
-				`⚠️ ${personagem.nome} observa o líquido azul brilhar intensamente no frasco, mas a energia se dissipa no ar...`,
+				`⚠️ ${personagem.nome} observa o líquido azul brilhar no frasco, mas a energia se dissipa...`,
 			);
 			console.log(
-				`   O caminho do vigor físico puro de um ${personagem.classe} não requer este tipo de essência.`,
+				`   O vigor físico de um ${personagem.classe} não encontra ressonância com esta essência mística.`,
 			);
 		}
 	}

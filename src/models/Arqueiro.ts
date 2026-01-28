@@ -27,6 +27,10 @@ export class Arqueiro extends Personagem {
 		}
 	}
 
+	public override getNomeRecurso(): string {
+		return 'Energia';
+	}
+
 	public override atacar(alvo: Personagem): number {
 		if (!this.estaVivo()) throw new PersonagemMortoError(this.nome);
 		if (!alvo.estaVivo()) throw new PersonagemMortoError(alvo.nome);
@@ -65,7 +69,7 @@ export class Arqueiro extends Personagem {
 
 		const custo = 15;
 		if (this._mana < custo) {
-			throw new ManaInsuficienteError(this.nome);
+			throw new ManaInsuficienteError(this);
 		}
 
 		this.mana -= custo;

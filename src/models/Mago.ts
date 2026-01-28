@@ -29,6 +29,10 @@ export class Mago extends Personagem {
 		}
 	}
 
+	public override getNomeRecurso(): string {
+		return 'Mana';
+	}
+
 	/**
 	 * Bola de Fogo: Uma explosão arcana devastadora.
 	 * Custo: 30 de mana. Dano: Triplo do ataque.
@@ -40,7 +44,7 @@ export class Mago extends Personagem {
 		const custo = 30;
 		if (this.mana < custo) {
 			// Usando getter
-			throw new ManaInsuficienteError(this.nome);
+			throw new ManaInsuficienteError(this);
 		}
 
 		this.mana -= custo;
