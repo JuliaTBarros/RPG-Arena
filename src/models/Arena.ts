@@ -1,40 +1,25 @@
+import * as readline from 'readline-sync';
 import { Personagem } from './Personagem';
+import { Guerreiro } from './Guerreiro';
+import { Mago } from './Mago';
+import { Arqueiro } from './Arqueiro';
+import { Ladino } from './Ladino';
 
 export class Arena {
 	private _lutadores: Personagem[] = [];
 
 	public adicionarLutador(lutador: Personagem): void {
 		this._lutadores.push(lutador);
-		console.log(
-			`\n🎺 As trombetas ecoam! ${lutador.nome}, o ${lutador.classe}, adentra os portões da Arena sob os gritos da multidão!`,
-		);
 	}
 
-	public listarLutadores(): void {
-		console.log(
-			`\n📜 O arauto desenrola um pergaminho antigo e proclama os nomes dos bravos combatentes:`,
-		);
-		if (this._lutadores.length === 0) {
-			console.log('   (O silêncio é absoluto. Não há combatentes na arena...)');
-			return;
-		}
-		this._lutadores.forEach((l, i) =>
-			console.log(`   ${i + 1}. ${l.nome} [${l.classe}] - Vida: ${l.vida}`),
-		);
+	// Retorna os nomes (que serão os nomes das classes) para o menu inicial
+	public getNomesLutadores(): string[] {
+		return this._lutadores.map((l) => l.nome);
 	}
 
 	public buscarLutador(nome: string): Personagem {
-		const encontrado = this._lutadores.find(
-			(l) => l.nome.toLowerCase() === nome.toLowerCase(),
-		);
-		if (!encontrado) {
-			console.log(
-				`\n🕯️  As crônicas da Arena não registram nenhum herói chamado "${nome}"... Estaria ele escondido nas brumas do esquecimento?`,
-			);
-			throw new Error(
-				`O campeão "${nome}" não foi encontrado nos registros desta Arena.`,
-			);
-		}
+		const encontrado = this._lutadores.find((l) => l.nome === nome);
+		if (!encontrado) throw new Error('Lutador não encontrado.');
 		return encontrado;
 	}
 
@@ -42,41 +27,78 @@ export class Arena {
 		const p1 = this.buscarLutador(nome1);
 		const p2 = this.buscarLutador(nome2);
 
-		console.log(`\n⚔️  O DUELO É ANUNCIADO: ${p1.nome} VS ${p2.nome} ⚔️`);
-		console.log(`--------------------------------------------------`);
-
 		let atacante = p1;
 		let defensor = p2;
-		let turno = 1;
+
+		console.log(`\n⚔️  O DUELO COMEÇOU: ${p1.nome} VS ${p2.nome} ⚔️`);
 
 		while (p1.estaVivo() && p2.estaVivo()) {
-			console.log(`\n--- 🌒 RODADA ${turno} ---`);
+			console.log(`\n--- 🌒 TURNO DE: ${atacante.nome} ---`);
+			console.log(`❤️  Vida: ${atacante.vida} | 🛡️  Inimigo: ${defensor.vida}`);
 
-			try {
-				atacante.atacar(defensor);
-				console.log(
-					`📊 Status de ${defensor.nome}: ${defensor.vida} pontos de vida restantes.`,
-				);
-			} catch (error: any) {
-				console.log(`⚠️  INTERRUPÇÃO MÍSTICA: ${error.message}`);
-				break;
+			const acoes = [
+				'Ataque Básico',
+				'Habilidade Especial',
+				'Usar Item',
+				'Passar Vez',
+			];
+			const escolha = readline.keyInSelect(acoes, 'Escolha sua acao:');
+
+			if (escolha === -1) {
+				console.log('🏳️ O lutador fugiu da arena! Duelo cancelado.');
+				return;
 			}
 
-			[atacante, defensor] = [defensor, atacante];
-			turno++;
+			try {
+				let acaoFinalizada = true;
 
-			if (p2.estaVivo() && p1.estaVivo()) {
-				console.log(`🔄 O ímpeto da batalha muda de mãos...`);
+				switch (escolha) {
+					case 0: // Ataque Básico
+						atacante.atacar(defensor);
+						break;
+					case 1: // Habilidade Especial
+						this.executarHabilidade(atacante, defensor);
+						break;
+					case 2: // Escolha de Item Interativa
+						acaoFinalizada = this.menuEscolhaItem(atacante);
+						break;
+					case 3:
+						console.log(`💤 ${atacante.nome} aguarda o momento certo.`);
+						break;
+				}
+
+				// Se a ação falhou (ex: cancelou o item), não muda o turno
+				if (acaoFinalizada) {
+					[atacante, defensor] = [defensor, atacante];
+				}
+			} catch (error: any) {
+				console.log(`\n⚠️  ${error.message}`);
+				console.log(`   Tente outra ação para este turno.`);
 			}
 		}
 
-		// Anúncio do Vencedor
 		const vencedor = p1.estaVivo() ? p1 : p2;
-		console.log(`\n--------------------------------------------------`);
-		console.log(`🏆 A PLATEIA RUGE! O combate chegou ao fim!`);
-		console.log(
-			`🌟 O GRANDE CAMPEÃO É: ${vencedor.nome}, o ${vencedor.classe}!`,
-		);
-		console.log(`--------------------------------------------------\n`);
+		console.log(`\n🏆 O GRANDE CAMPEÃO É: ${vencedor.nome}!`);
+	}
+
+	private menuEscolhaItem(personagem: Personagem): boolean {
+		const itens = personagem.inventario.map((i) => i.nome);
+		if (itens.length === 0) {
+			console.log('🎒 Sua bolsa está vazia!');
+			return false; // Não finaliza a ação, permite escolher outra
+		}
+
+		const itemIdx = readline.keyInSelect(itens, 'Qual item deseja usar?');
+		if (itemIdx === -1) return false; // Voltou do menu
+
+		personagem.usarItem(itemIdx);
+		return true;
+	}
+
+	private executarHabilidade(at: Personagem, df: Personagem): void {
+		if (at instanceof Guerreiro) at.golpeBrutal(df);
+		else if (at instanceof Mago) at.bolaDeFogo(df);
+		else if (at instanceof Arqueiro) at.flechaPrecisa(df);
+		else if (at instanceof Ladino) at.ataqueFurtivo(df);
 	}
 }

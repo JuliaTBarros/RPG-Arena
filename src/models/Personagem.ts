@@ -28,6 +28,10 @@ export abstract class Personagem {
 		this.defesa = defesa;
 	}
 
+	get inventario(): IItem[] {
+		return [...this._inventario]; // Retorna uma cópia para segurança
+	}
+
 	get vida(): number {
 		return this._vida;
 	}
