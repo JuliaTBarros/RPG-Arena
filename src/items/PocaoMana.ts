@@ -5,28 +5,25 @@ import { Personagem } from '../models/Personagem';
 export class PocaoMana implements IItem {
 	public readonly nome: string = 'Poção de Mana';
 	public readonly descricao: string =
-		'Um elixir azul profundo que restaura o fluxo de energia arcana.';
+		'Um elixir azul profundo que restaura o fluxo de energia interna.';
 	public readonly raridade: Raridade = Raridade.Incomum;
 
 	usar(personagem: Personagem): void {
-		
+		// Verifica se o personagem possui mana ou energia (Mago, Arqueiro ou Ladino)
 		if ('mana' in personagem) {
-			const manaAnterior = (personagem as any).mana;
-			(personagem as any).mana += 30;
+			(personagem as any).mana += 30; // O setter cuida de não ultrapassar o máximo
 
 			console.log(
-				`🌀 Uma aura azulada envolve ${personagem.nome} enquanto o poder místico flui por suas veias.`,
+				`🌀 Uma essência revigorante flui pelas veias de ${personagem.nome}, restaurando suas capacidades!`,
 			);
-			console.log(
-				`🧪 Energia arcana restaurada! Mana atual: ${(personagem as any).mana}`,
-			);
+			console.log(`🧪 Mana atual: ${(personagem as any).mana}`);
 		} else {
-			// Texto imersivo para classes sem mana (Guerreiro/Ladino)
+			// Texto para classes que realmente não possuem barra de recurso (ex: Guerreiro)
 			console.log(
-				`⚠️ ${personagem.nome} observa o líquido azul brilhar intensamente no frasco, mas a energia se dissipa no ar...`,
+				`⚠️ ${personagem.nome} observa o líquido azul brilhar intensamente, mas a energia não encontra receptáculo...`,
 			);
 			console.log(
-				`   O dom das artes místicas não corre pelas veias de um ${personagem.classe}.`,
+				`   O caminho do vigor físico puro de um ${personagem.classe} não requer este tipo de essência.`,
 			);
 		}
 	}

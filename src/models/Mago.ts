@@ -38,11 +38,13 @@ export class Mago extends Personagem {
 		if (!alvo.estaVivo()) throw new PersonagemMortoError(alvo.nome);
 
 		const custo = 30;
-		if (this._mana < custo) {
+		if (this.mana < custo) {
+			// Usando getter
 			throw new ManaInsuficienteError(this.nome);
 		}
 
-		this._mana -= custo;
+		this.mana -= custo;
+
 		const danoBase = this.ataque * 3;
 		const danoFinal = Math.max(0, danoBase - alvo.defesa);
 
@@ -61,7 +63,7 @@ export class Mago extends Personagem {
 			);
 		}
 
-		console.log(`✨ Energia arcana restante: ${this._mana}`);
+		console.log(`✨ Energia arcana restante: ${this.mana}`);
 		return danoFinal;
 	}
 
