@@ -14,18 +14,16 @@ export abstract class Personagem {
 	public defesa: number;
 
 	constructor(
-		_vida: number,
-		_vidaMaxima: number,
 		nome: string,
 		classe: ClassePersonagem,
+		vida: number,
 		ataque: number,
 		defesa: number,
 	) {
-		this._vidaMaxima = _vida;
-		this._vida = this._vidaMaxima;
-
 		this.nome = nome;
 		this.classe = classe;
+		this._vidaMaxima = vida;
+		this._vida = this._vidaMaxima;
 		this.ataque = ataque;
 		this.defesa = defesa;
 	}
