@@ -1,26 +1,28 @@
 import type { IItem } from '../interfaces/IItem';
 import { Raridade } from '../enums/Raridade';
 import { Personagem } from '../models/Personagem';
+import { ClassePersonagem } from '../enums/ClassePersonagem';
 
 export class PocaoMana implements IItem {
 	public readonly nome: string = 'Poção de Mana';
 	public readonly descricao: string =
-		'Um elixir azul profundo que restaura o fluxo de energia interna.';
+		'Um elixir azul profundo que restaura o fluxo de energia arcana.';
 	public readonly raridade: Raridade = Raridade.Incomum;
 
 	usar(personagem: Personagem): void {
-		// Verifica se o personagem possui mana ou energia (Mago, Arqueiro ou Ladino)
 		if ('mana' in personagem) {
-			(personagem as any).mana += 30; // O setter cuida de não ultrapassar o máximo
+			(personagem as any).mana += 30;
+
+			const recurso =
+				personagem.classe === ClassePersonagem.Ladino ? 'Energia' : 'Mana';
 
 			console.log(
-				`🌀 Uma essência revigorante flui pelas veias de ${personagem.nome}, restaurando suas capacidades!`,
+				`🌀 Uma essência azulada envolve ${personagem.nome}, restaurando seu fluxo de ${recurso}!`,
 			);
-			console.log(`🧪 Mana atual: ${(personagem as any).mana}`);
+			console.log(`🧪 ${recurso} atual: ${(personagem as any).mana}`);
 		} else {
-			// Texto para classes que realmente não possuem barra de recurso (ex: Guerreiro)
 			console.log(
-				`⚠️ ${personagem.nome} observa o líquido azul brilhar intensamente, mas a energia não encontra receptáculo...`,
+				`⚠️ ${personagem.nome} observa o líquido azul brilhar intensamente no frasco, mas a energia se dissipa no ar...`,
 			);
 			console.log(
 				`   O caminho do vigor físico puro de um ${personagem.classe} não requer este tipo de essência.`,

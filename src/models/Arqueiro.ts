@@ -68,7 +68,7 @@ export class Arqueiro extends Personagem {
 			throw new ManaInsuficienteError(this.nome);
 		}
 
-		this._mana -= custo;
+		this.mana -= custo;
 		const danoBase = this.ataque * 2;
 		const danoFinal = Math.max(0, danoBase - alvo.defesa);
 

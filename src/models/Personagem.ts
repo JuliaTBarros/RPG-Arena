@@ -101,7 +101,7 @@ export abstract class Personagem {
 		const item = this._inventario[indice];
 		if (item) {
 			console.log(
-				`⚔️ ${this.nome} abre sua bolsa e decide utilizar ${item.nome}!`,
+				`🎒 ${this.nome} abre sua bolsa e decide utilizar ${item.nome}!`,
 			);
 			item.usar(this);
 			this._inventario.splice(indice, 1);
