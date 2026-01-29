@@ -8,9 +8,8 @@ export class Mago extends Personagem {
 	private _manaMaxima: number;
 
 	constructor(nome: string, ataque: number = 12, defesa: number = 5) {
-		// Vida: 80 conforme os requisitos
 		super(nome, ClassePersonagem.Mago, 80, ataque, defesa);
-		this._manaMaxima = 100; // Mana: 100 conforme os requisitos
+		this._manaMaxima = 100;
 		this._mana = this._manaMaxima;
 	}
 
@@ -37,7 +36,7 @@ export class Mago extends Personagem {
 	 * Bola de Fogo: Uma explosão arcana devastadora.
 	 * Custo: 30 de mana. Dano: Triplo do ataque.
 	 */
-	public bolaDeFogo(alvo: Personagem): number {
+	public override atacar(alvo: Personagem): number {
 		if (!this.estaVivo()) throw new PersonagemMortoError(this.nome);
 		if (!alvo.estaVivo()) throw new PersonagemMortoError(alvo.nome);
 

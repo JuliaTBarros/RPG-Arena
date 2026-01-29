@@ -1,4 +1,3 @@
-import * as readline from 'readline-sync';
 import { Personagem } from './Personagem';
 import { Guerreiro } from './Guerreiro';
 import { Mago } from './Mago';
@@ -7,19 +6,21 @@ import { Ladino } from './Ladino';
 
 export class Arena {
 	private _lutadores: Personagem[] = [];
+	private _atacante: Personagem | null = null;
+	private _defensor: Personagem | null = null;
 
 	public adicionarLutador(lutador: Personagem): void {
 		this._lutadores.push(lutador);
 	}
 
-	// Retorna os nomes (que serão os nomes das classes) para o menu inicial
-	public getNomesLutadores(): string[] {
-		return this._lutadores.map((l) => l.nome);
+	public getClassesLutadores(): string[] {
+		return this._lutadores.map((l) => l.classe);
 	}
 
-	public buscarLutador(nome: string): Personagem {
-		const encontrado = this._lutadores.find((l) => l.nome === nome);
-		if (!encontrado) throw new Error('Lutador não encontrado.');
+	public buscarLutadorPorClasse(classe: string): Personagem {
+		const encontrado = this._lutadores.find((l) => l.classe === classe);
+		if (!encontrado)
+			throw new Error('A linhagem deste guerreiro é desconhecida nesta arena.');
 		return encontrado;
 	}
 
@@ -34,86 +35,87 @@ export class Arena {
 		});
 	}
 
-	public batalhar(nome1: string, nome2: string): void {
-		const p1 = this.buscarLutador(nome1);
-		const p2 = this.buscarLutador(nome2);
+	/**
+	 * Inicia o duelo com os textos épicos originais.
+	 */
+	public prepararDuelo(classe1: string, classe2: string): void {
+		this._atacante = this.buscarLutadorPorClasse(classe1);
+		this._defensor = this.buscarLutadorPorClasse(classe2);
 
-		let atacante = p1;
-		let defensor = p2;
+		console.log(
+			`\n⚔️  O DUELO COMEÇOU: ${this._atacante.nome} (${this._atacante.classe}) VS ${this._defensor.nome} (${this._defensor.classe}) ⚔️`,
+		);
 
-		console.log(`\n⚔️  O DUELO COMEÇOU: ${p1.nome} VS ${p2.nome} ⚔️`);
-
-		while (p1.estaVivo() && p2.estaVivo()) {
-			console.log(`\n--- 🌒 TURNO DE: ${atacante.nome} ---`);
-			console.log(`❤️  Vida: ${atacante.vida} | 🛡️  Inimigo: ${defensor.vida}`);
-
-			const acoes = [
-				'Ataque Básico',
-				'Habilidade Especial',
-				'Usar Item',
-				'Passar Vez',
-			];
-			const escolha = readline.keyInSelect(
-				acoes,
-				'O que farás neste turno, bravo combatente?',
-			);
-
-			if (escolha === -1) {
-				console.log(
-					'🏳️ O lutador fugiu da arena! O destino interveio e o combate foi interrompido.',
-				);
-				return;
-			}
-
-			try {
-				let acaoFinalizada = true;
-
-				switch (escolha) {
-					case 0: // Ataque Básico
-						atacante.atacar(defensor);
-						break;
-					case 1: // Habilidade Especial
-						this.executarHabilidade(atacante, defensor);
-						break;
-					case 2: // Escolha de Item Interativa
-						acaoFinalizada = this.menuEscolhaItem(atacante);
-						break;
-					case 3:
-						console.log(`💤 ${atacante.nome} aguarda o momento certo.`);
-						break;
-				}
-
-				// Se a ação falhou (ex: cancelou o item), não muda o turno
-				if (acaoFinalizada) {
-					[atacante, defensor] = [defensor, atacante];
-				}
-			} catch (error: any) {
-				console.log(`\n⚠️  ${error.message}`);
-				console.log(`   Tente outra ação para este turno.`);
-			}
-		}
-
-		const vencedor = p1.estaVivo() ? p1 : p2;
-		console.log(`\n🏆 O GRANDE CAMPEÃO É: ${vencedor.nome}!`);
+		this.exibirStatusTurno();
 	}
 
-	private menuEscolhaItem(personagem: Personagem): boolean {
-		const itens = personagem.inventario.map((i) => i.nome);
-		if (itens.length === 0) {
-			console.log('🎒 Sua bolsa está vazia!');
-			return false; // Não finaliza a ação, permite escolher outra
+	/**
+	 * Processa a ação mantendo as mensagens de erro e interações.
+	 */
+	public executarTurno(
+		acao: 'atacar' | 'especial' | 'item' | 'passar',
+		itemIdx?: number,
+	): void {
+		if (!this._atacante || !this._defensor) return;
+
+		try {
+			switch (acao) {
+				case 'atacar':
+					this._atacante.atacar(this._defensor);
+					break;
+				case 'especial':
+					this.executarHabilidade(this._atacante, this._defensor);
+					break;
+				case 'item':
+					if (itemIdx === undefined) return;
+					this._atacante.usarItem(itemIdx);
+					break;
+				case 'passar':
+					console.log(`💤 ${this._atacante.nome} aguarda o momento certo.`);
+					break;
+			}
+
+			if (this.verificarFimDeJogo()) return;
+
+			this.alternarTurno();
+		} catch (error: any) {
+			console.log(`\n⚠️  ${error.message}`);
+			console.log(`   Tente outra ação para este turno.`);
 		}
+	}
 
-		const itemIdx = readline.keyInSelect(itens, 'Qual item deseja usar?');
-		if (itemIdx === -1) return false; // Voltou do menu
+	private exibirStatusTurno(): void {
+		if (!this._atacante || !this._defensor) return;
+		console.log(`\n--- 🌒 TURNO DE: ${this._atacante.nome} ---`);
+		console.log(
+			`❤️  Vitalidade: ${this._atacante.vida} | 🛡️  Oponente: ${this._defensor.vida}`,
+		);
+	}
 
-		personagem.usarItem(itemIdx);
-		return true;
+	private alternarTurno(): void {
+		if (this._atacante && this._defensor) {
+			[this._atacante, this._defensor] = [this._defensor, this._atacante];
+			this.exibirStatusTurno();
+		}
+	}
+
+	private verificarFimDeJogo(): boolean {
+		if (this._atacante && this._defensor) {
+			if (!this._atacante.estaVivo() || !this._defensor.estaVivo()) {
+				const vencedor = this._atacante.estaVivo()
+					? this._atacante
+					: this._defensor;
+				console.log(`\n🏆 O GRANDE CAMPEÃO É: ${vencedor.nome}!`);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private executarHabilidade(at: Personagem, df: Personagem): void {
+		// Mantém as chamadas que ativam os textos específicos de cada classe
 		if (at instanceof Guerreiro) at.golpeBrutal(df);
-		else if (at instanceof Mago) at.bolaDeFogo(df);
+		else if (at instanceof Mago) at.meditar();
 		else if (at instanceof Arqueiro) at.flechaPrecisa(df);
 		else if (at instanceof Ladino) at.ataqueFurtivo(df);
 	}
