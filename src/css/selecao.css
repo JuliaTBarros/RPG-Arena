@@ -1,0 +1,166 @@
+body {
+    background: #1a1712;
+    color: #e0d5b1;
+    font-family: 'Georgia', serif;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#app {
+    max-width: 1000px;
+    width: 100%;
+}
+
+h2 {
+    text-align: center;
+    color: #d4af37;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.instrucao {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #bcae8d;
+    font-style: italic;
+}
+
+/* --- 🃏 Cards de Heróis --- */
+#grimorio-herois {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.card-heroi {
+    background: #231f18;
+    border: 2px solid #5c4b37;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 220px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.card-heroi:hover {
+    transform: translateY(-5px);
+    border-color: #bcae8d;
+}
+
+/* Estados de Seleção */
+.card-heroi.p1-ativo {
+    border-color: #ffd700;
+    box-shadow: 0 0 15px #ffd700;
+}
+
+.card-heroi.p2-ativo {
+    border-color: #ff4500;
+    box-shadow: 0 0 15px #ff4500;
+}
+
+.card-imagem {
+    height: 250px;
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+}
+
+.card-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #12100c;
+}
+
+.card-heroi:hover img {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.card-info {
+    padding: 15px;
+    text-align: center;
+    border-top: 1px solid #5c4b37;
+}
+
+.card-info h4 {
+    color: #d4af37;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+}
+
+.card-info p {
+    font-size: 0.85em;
+    font-style: italic;
+    color: #bcae8d;
+    margin: 0;
+}
+
+/* --- 🛡️ Painel de Escolha --- */
+.painel-escolha {
+    background: #12100c;
+    padding: 20px;
+    border: 1px solid #d4af37;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.status-selecao {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 1.1em;
+}
+
+.indicador {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.indicador.p1 strong {
+    color: #ffd700;
+}
+
+.indicador.p2 strong {
+    color: #ff4500;
+}
+
+.versus {
+    font-weight: bold;
+    color: #5c4b37;
+    font-size: 1.5em;
+}
+
+button {
+    background: #4a3b2a;
+    color: #fff;
+    border: 1px solid #d4af37;
+    padding: 15px 40px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: inherit;
+    font-size: 1.1em;
+    text-transform: uppercase;
+}
+
+button:hover:not(:disabled) {
+    background: #d4af37;
+    color: #12100c;
+    box-shadow: 0 0 20px #d4af37;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(1);
+}

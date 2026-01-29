@@ -1,0 +1,54 @@
+body {
+    background: #0a0907;
+    color: #e0d5b1;
+    font-family: 'Georgia', serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+
+#app {
+    width: 100%;
+    max-width: 800px;
+}
+
+#pergaminho-batalha {
+    background: #12100c;
+    border: 1px solid #5c4b37;
+    height: 400px;
+    overflow-y: auto;
+    padding: 25px;
+    margin-bottom: 25px;
+    line-height: 1.8;
+    color: #dcd0b0;
+    border-radius: 8px;
+    box-shadow: inset 0 0 20px #000;
+}
+
+#pergaminho-batalha p {
+    border-bottom: 1px solid #1a1712;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.painel-comandos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+button {
+    background: #231f18;
+    color: #d4af37;
+    border: 1px solid #5c4b37;
+    padding: 20px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #4a3b2a;
+    border-color: #d4af37;
+    box-shadow: 0 0 10px #d4af37;
+}

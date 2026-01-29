@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Salão dos Campeões</title>
+    <link rel="stylesheet" href="../css/selecao.css">
+</head>
+<body>
+    <div id="app">
+        <h2>📜 Os Estandartes da Guerra</h2>
+        <p class="instrucao">Clique em um estandarte para escolher seu <strong>Campeão (P1)</strong>. Clique em outro para definir o <strong>Desafiante (P2)</strong>.</p>
+        
+        <div id="grimorio-herois">
+            </div>
+        
+        <div class="painel-escolha">
+            <div class="status-selecao">
+                <div class="indicador p1">
+                    <span>Seu Campeão:</span>
+                    <strong id="nome-p1">---</strong>
+                </div>
+                <div class="versus">VS</div>
+                <div class="indicador p2">
+                    <span>Desafiante:</span>
+                    <strong id="nome-p2">---</strong>
+                </div>
+            </div>
+
+            <input type="hidden" id="hidden-p1" value="">
+            <input type="hidden" id="hidden-p2" value="">
+
+            <button id="btn-iniciar-duelo" disabled>Sancionar o Duelo ⚔️</button>
+        </div>
+    </div>
+    <script type="module" src="../app_selecao.js"></script>
+</body>
+</html>

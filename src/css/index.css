@@ -1,0 +1,58 @@
+body {
+    background: #0a0907;
+    color: #e0d5b1;
+    font-family: 'Georgia', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.moldura-mistica {
+    text-align: center;
+    border: 2px solid #5c4b37;
+    padding: 50px;
+    background: #1a1712;
+    box-shadow: 0 0 50px #000;
+    border-radius: 10px;
+}
+
+h1 {
+    color: #d4af37;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 3em;
+}
+
+.logo-epic {
+    font-size: 5em;
+    display: block;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px #d4af37);
+}
+
+.narrativa {
+    font-style: italic;
+    max-width: 400px;
+    margin: 20px auto;
+    line-height: 1.6;
+    color: #bcae8d;
+}
+
+.btn-link {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 15px 30px;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn-link:hover {
+    background: #d4af37;
+    color: #1a1712;
+    box-shadow: 0 0 20px #d4af37;
+}
