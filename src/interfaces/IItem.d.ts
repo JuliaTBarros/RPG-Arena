@@ -1,5 +1,5 @@
-import { Raridade } from '../enums/Raridade';
-import type { Personagem } from '../models/Personagem';
+import { Raridade } from '../enums/Raridade.js';
+import type { Personagem } from '../models/Personagem.js';
 export interface IItem {
     nome: string;
     descricao: string;

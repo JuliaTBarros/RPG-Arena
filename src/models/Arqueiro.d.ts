@@ -1,4 +1,4 @@
-import { Personagem } from './Personagem';
+import { Personagem } from './Personagem.js';
 export declare class Arqueiro extends Personagem {
     private _mana;
     private _manaMaxima;

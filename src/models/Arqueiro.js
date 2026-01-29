@@ -1,13 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Arqueiro = void 0;
-const Personagem_1 = require("./Personagem");
-const ClassePersonagem_1 = require("../enums/ClassePersonagem");
-const ManaInsuficienteError_1 = require("../errors/ManaInsuficienteError");
-const PersonagemMortoError_1 = require("../errors/PersonagemMortoError");
-class Arqueiro extends Personagem_1.Personagem {
+import { Personagem } from './Personagem.js';
+import { ClassePersonagem } from '../enums/ClassePersonagem.js';
+import { ManaInsuficienteError } from '../errors/ManaInsuficienteError.js';
+import { PersonagemMortoError } from '../errors/PersonagemMortoError.js';
+export class Arqueiro extends Personagem {
     constructor(nome, ataque = 15, defesa = 8) {
-        super(nome, ClassePersonagem_1.ClassePersonagem.Arqueiro, 100, ataque, defesa);
+        super(nome, ClassePersonagem.Arqueiro, 100, ataque, defesa);
         this._manaMaxima = 50;
         this._mana = this._manaMaxima;
     }
@@ -30,9 +27,9 @@ class Arqueiro extends Personagem_1.Personagem {
     }
     atacar(alvo) {
         if (!this.estaVivo())
-            throw new PersonagemMortoError_1.PersonagemMortoError(this.nome);
+            throw new PersonagemMortoError(this.nome);
         if (!alvo.estaVivo())
-            throw new PersonagemMortoError_1.PersonagemMortoError(alvo.nome);
+            throw new PersonagemMortoError(alvo.nome);
         let multiplicador = 1;
         const chanceCritico = Math.random();
         console.log(`🏹 ${this.nome} tensiona a corda de seu arco e dispara uma flecha sibilante contra ${alvo.nome}!`);
@@ -52,12 +49,12 @@ class Arqueiro extends Personagem_1.Personagem {
     }
     flechaPrecisa(alvo) {
         if (!this.estaVivo())
-            throw new PersonagemMortoError_1.PersonagemMortoError(this.nome);
+            throw new PersonagemMortoError(this.nome);
         if (!alvo.estaVivo())
-            throw new PersonagemMortoError_1.PersonagemMortoError(alvo.nome);
+            throw new PersonagemMortoError(alvo.nome);
         const custo = 15;
         if (this._mana < custo) {
-            throw new ManaInsuficienteError_1.ManaInsuficienteError(this);
+            throw new ManaInsuficienteError(this);
         }
         this.mana -= custo;
         const danoBase = this.ataque * 2;
@@ -74,5 +71,4 @@ class Arqueiro extends Personagem_1.Personagem {
         return danoFinal;
     }
 }
-exports.Arqueiro = Arqueiro;
 //# sourceMappingURL=Arqueiro.js.map

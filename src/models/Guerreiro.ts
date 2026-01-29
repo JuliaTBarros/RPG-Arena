@@ -1,6 +1,6 @@
-import { ClassePersonagem } from '../enums/ClassePersonagem';
-import { PersonagemMortoError } from '../errors/PersonagemMortoError';
-import { Personagem } from './Personagem';
+import { ClassePersonagem } from '../enums/ClassePersonagem.js';
+import { PersonagemMortoError } from '../errors/PersonagemMortoError.js';
+import { Personagem } from './Personagem.js';
 
 export class Guerreiro extends Personagem {
 	constructor(nome: string, defesa: number = 10) {

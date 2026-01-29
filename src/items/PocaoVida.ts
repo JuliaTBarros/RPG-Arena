@@ -1,6 +1,6 @@
-import type { IItem } from '../interfaces/IItem';
-import { Raridade } from '../enums/Raridade';
-import { Personagem } from '../models/Personagem';
+import type { IItem } from '../interfaces/IItem.js';
+import { Raridade } from '../enums/Raridade.js';
+import { Personagem } from '../models/Personagem.js';
 
 export class PocaoVida implements IItem {
 	public readonly nome: string = 'Poção de Vida';

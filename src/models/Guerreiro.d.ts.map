@@ -1,1 +1,1 @@
-{"version":3,"file":"Guerreiro.d.ts","sourceRoot":"","sources":["Guerreiro.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,UAAU,EAAE,MAAM,cAAc,CAAC;AAE1C,qBAAa,SAAU,SAAQ,UAAU;gBAC5B,IAAI,EAAE,MAAM,EAAE,MAAM,GAAE,MAAW;IAKtC,WAAW,CAAC,IAAI,EAAE,UAAU,GAAG,MAAM;CAyB5C"}
+{"version":3,"file":"Guerreiro.d.ts","sourceRoot":"","sources":["Guerreiro.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,UAAU,EAAE,MAAM,iBAAiB,CAAC;AAE7C,qBAAa,SAAU,SAAQ,UAAU;gBAC5B,IAAI,EAAE,MAAM,EAAE,MAAM,GAAE,MAAW;IAKtC,WAAW,CAAC,IAAI,EAAE,UAAU,GAAG,MAAM;CAyB5C"}

@@ -1,8 +1,8 @@
-import { Personagem } from './Personagem';
-import { Guerreiro } from './Guerreiro';
-import { Mago } from './Mago';
-import { Arqueiro } from './Arqueiro';
-import { Ladino } from './Ladino';
+import { Personagem } from './Personagem.js';
+import { Guerreiro } from './Guerreiro.js';
+import { Mago } from './Mago.js';
+import { Arqueiro } from './Arqueiro.js';
+import { Ladino } from './Ladino.js';
 
 export class Arena {
 	private _lutadores: Personagem[] = [];

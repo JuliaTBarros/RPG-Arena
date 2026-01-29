@@ -1,5 +1,5 @@
-import type { IItem } from '../interfaces/IItem';
-import { ClassePersonagem } from '../enums/ClassePersonagem';
+import type { IItem } from '../interfaces/IItem.js';
+import { ClassePersonagem } from '../enums/ClassePersonagem.js';
 export declare abstract class Personagem {
     private _vida;
     private _vidaMaxima;

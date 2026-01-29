@@ -1,4 +1,4 @@
-import { Personagem } from './Personagem';
+import { Personagem } from './Personagem.js';
 export declare class Ladino extends Personagem {
     private _mana;
     private _manaMaxima;

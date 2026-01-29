@@ -1,12 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.PocaoMana = void 0;
-const Raridade_1 = require("../enums/Raridade");
-class PocaoMana {
+import { Raridade } from '../enums/Raridade.js';
+export class PocaoMana {
     constructor() {
         this.nome = 'Poção de Mana';
         this.descricao = 'Um elixir azul profundo que restaura o fluxo de energia arcana.';
-        this.raridade = Raridade_1.Raridade.Incomum;
+        this.raridade = Raridade.Incomum;
     }
     usar(personagem) {
         if ('mana' in personagem) {
@@ -22,5 +19,4 @@ class PocaoMana {
         }
     }
 }
-exports.PocaoMana = PocaoMana;
 //# sourceMappingURL=PocaoMana.js.map

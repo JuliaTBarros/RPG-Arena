@@ -1,9 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Personagem = void 0;
-const PersonagemMortoError_1 = require("../errors/PersonagemMortoError");
-const InventarioCheioError_1 = require("../errors/InventarioCheioError");
-class Personagem {
+import { PersonagemMortoError } from '../errors/PersonagemMortoError.js';
+import { InventarioCheioError } from '../errors/InventarioCheioError.js';
+export class Personagem {
     constructor(nome, classe, vida, ataque, defesa) {
         this._inventario = [];
         this.nome = nome;
@@ -38,9 +35,9 @@ class Personagem {
     }
     atacar(alvo) {
         if (!this.estaVivo())
-            throw new PersonagemMortoError_1.PersonagemMortoError(this.nome);
+            throw new PersonagemMortoError(this.nome);
         if (!alvo.estaVivo())
-            throw new PersonagemMortoError_1.PersonagemMortoError(alvo.nome);
+            throw new PersonagemMortoError(alvo.nome);
         const dano = Math.max(0, this.ataque - alvo.defesa);
         alvo.vida -= dano;
         console.log(`⚔️ ${this.nome} ergue sua arma e desfere um golpe contra ${alvo.nome}!`);
@@ -66,7 +63,7 @@ class Personagem {
     }
     adicionarItem(item) {
         if (this._inventario.length >= 5) {
-            throw new InventarioCheioError_1.InventarioCheioError();
+            throw new InventarioCheioError();
         }
         this._inventario.push(item);
         console.log(`📦 ${this.nome} encontrou [${item.nome}] e o guardou com cuidado em sua bolsa.`);
@@ -84,5 +81,4 @@ class Personagem {
         }
     }
 }
-exports.Personagem = Personagem;
 //# sourceMappingURL=Personagem.js.map

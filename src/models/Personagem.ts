@@ -1,7 +1,7 @@
-import type { IItem } from '../interfaces/IItem';
-import { ClassePersonagem } from '../enums/ClassePersonagem';
-import { PersonagemMortoError } from '../errors/PersonagemMortoError';
-import { InventarioCheioError } from '../errors/InventarioCheioError';
+import type { IItem } from '../interfaces/IItem.js';
+import { ClassePersonagem } from '../enums/ClassePersonagem.js';
+import { PersonagemMortoError } from '../errors/PersonagemMortoError.js';
+import { InventarioCheioError } from '../errors/InventarioCheioError.js';
 
 export abstract class Personagem {
 	private _vida: number;

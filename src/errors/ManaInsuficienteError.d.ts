@@ -1,4 +1,4 @@
-import type { Personagem } from '../models/Personagem';
+import type { Personagem } from '../models/Personagem.js';
 export declare class ManaInsuficienteError extends Error {
     constructor(personagem: Personagem);
 }

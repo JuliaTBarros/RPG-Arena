@@ -1,7 +1,7 @@
-import { Personagem } from './Personagem';
-import { ClassePersonagem } from '../enums/ClassePersonagem';
-import { ManaInsuficienteError } from '../errors/ManaInsuficienteError';
-import { PersonagemMortoError } from '../errors/PersonagemMortoError';
+import { Personagem } from './Personagem.js';
+import { ClassePersonagem } from '../enums/ClassePersonagem.js';
+import { ManaInsuficienteError } from '../errors/ManaInsuficienteError.js';
+import { PersonagemMortoError } from '../errors/PersonagemMortoError.js';
 
 export class Arqueiro extends Personagem {
 	private _mana: number;

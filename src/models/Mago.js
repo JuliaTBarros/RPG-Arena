@@ -1,13 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Mago = void 0;
-const Personagem_1 = require("./Personagem");
-const ClassePersonagem_1 = require("../enums/ClassePersonagem");
-const ManaInsuficienteError_1 = require("../errors/ManaInsuficienteError");
-const PersonagemMortoError_1 = require("../errors/PersonagemMortoError");
-class Mago extends Personagem_1.Personagem {
+import { Personagem } from './Personagem.js';
+import { ClassePersonagem } from '../enums/ClassePersonagem.js';
+import { ManaInsuficienteError } from '../errors/ManaInsuficienteError.js';
+import { PersonagemMortoError } from '../errors/PersonagemMortoError.js';
+export class Mago extends Personagem {
     constructor(nome, ataque = 12, defesa = 5) {
-        super(nome, ClassePersonagem_1.ClassePersonagem.Mago, 80, ataque, defesa);
+        super(nome, ClassePersonagem.Mago, 80, ataque, defesa);
         this._manaMaxima = 100;
         this._mana = this._manaMaxima;
     }
@@ -35,13 +32,13 @@ class Mago extends Personagem_1.Personagem {
      */
     atacar(alvo) {
         if (!this.estaVivo())
-            throw new PersonagemMortoError_1.PersonagemMortoError(this.nome);
+            throw new PersonagemMortoError(this.nome);
         if (!alvo.estaVivo())
-            throw new PersonagemMortoError_1.PersonagemMortoError(alvo.nome);
+            throw new PersonagemMortoError(alvo.nome);
         const custo = 30;
         if (this.mana < custo) {
             // Usando getter
-            throw new ManaInsuficienteError_1.ManaInsuficienteError(this);
+            throw new ManaInsuficienteError(this);
         }
         this.mana -= custo;
         const danoBase = this.ataque * 3;
@@ -63,7 +60,7 @@ class Mago extends Personagem_1.Personagem {
      */
     meditar() {
         if (!this.estaVivo())
-            throw new PersonagemMortoError_1.PersonagemMortoError(this.nome);
+            throw new PersonagemMortoError(this.nome);
         const recuperacao = 25;
         this.mana += recuperacao;
         console.log(`🧘 ${this.nome} fecha os olhos e entra em um estado de transe profundo...`);
@@ -71,5 +68,4 @@ class Mago extends Personagem_1.Personagem {
         console.log(`✨ Mana atual: ${this.mana}`);
     }
 }
-exports.Mago = Mago;
 //# sourceMappingURL=Mago.js.map
